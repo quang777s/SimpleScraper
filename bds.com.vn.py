@@ -7,12 +7,8 @@ import logging
 import datetime
 from bs4 import BeautifulSoup
 
-CURL_TEMPLATE = """
-curl 'https://batdongsan.com.vn/cho-thue-van-phong-duong-ben-van-don-phuong-12-prj-the-tresor/can-ho-office-q4-30m2-nt-co-ban-12tr-th-lh-0903812456-pr{id}' -H 'Accept-Encoding: gzip, deflate, br' -H 'Accept-Language: en-US,en;q=0.9' -H 'Upgrade-Insecure-Requests: 1' -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8' -H 'Cache-Control: max-age=0' -H 'Cookie: SERVERID=E; __cfduid=ddecd2be7769689a7d70d16dd179654c61513070065; ASP.NET_SessionId=2bwtv1fm5jd5jldq2is2xz0f; _ga=GA1.3.1508381977.1513070065; _gid=GA1.3.1634987642.1513070065; USER_SEARCH_PRODUCT_CONTEXT=49%7C50%7CSG%7C56%7C103%7C1319%7C2044%2C14126738; statsinfo=1513070085648%2C45aa57e8-9eb1-4892-bdf2-5dc4267303a8; __asc=8134524d1604a00fc488a963078; __auc=8134524d1604a00fc488a963078; sidtb=WdiwXIxcrxY6zXmpxPqwNsxkXhJTKQ8C; usidtb=ECyiRVvxaguOYodc2P0tYRWuH3QNosoM' -H 'Connection: keep-alive' -H 'If-Modified-Since: Tue, 12 Dec 2017 09:20:36 GMT' --compressed
-"""
-CURL_TEMPLATE_RETRY = """
-curl '{url}' -H 'Accept-Encoding: gzip, deflate, br' -H 'Accept-Language: en-US,en;q=0.9' -H 'Upgrade-Insecure-Requests: 1' -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8' -H 'Cache-Control: max-age=0' -H 'Cookie: SERVERID=E; __cfduid=ddecd2be7769689a7d70d16dd179654c61513070065; ASP.NET_SessionId=2bwtv1fm5jd5jldq2is2xz0f; _ga=GA1.3.1508381977.1513070065; _gid=GA1.3.1634987642.1513070065; USER_SEARCH_PRODUCT_CONTEXT=49%7C50%7CSG%7C56%7C103%7C1319%7C2044%2C14126738; statsinfo=1513070085648%2C45aa57e8-9eb1-4892-bdf2-5dc4267303a8; __asc=8134524d1604a00fc488a963078; __auc=8134524d1604a00fc488a963078; sidtb=WdiwXIxcrxY6zXmpxPqwNsxkXhJTKQ8C; usidtb=ECyiRVvxaguOYodc2P0tYRWuH3QNosoM' -H 'Connection: keep-alive' -H 'If-Modified-Since: Tue, 12 Dec 2017 09:20:36 GMT' --compressed
-"""
+CURL_TEMPLATE = "curl https://batdongsan.com.vn/cho-thue-van-phong-duong-ben-van-don-phuong-12-prj-the-tresor/can-ho-office-q4-30m2-nt-co-ban-12tr-th-lh-0903812456-pr{id}"
+CURL_TEMPLATE_RETRY = "curl {url}"
 START_ID = 14126738
 END_ID = 14126748
 
