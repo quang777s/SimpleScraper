@@ -36,7 +36,8 @@ city_address = {
     'Tiền Giang': 13,
     'Huế': 14,
     'Quảng Ninh': 15,
-    'Thanh Hóa': 16
+    'Thanh Hóa': 16,
+    'Cần Thơ': 17
 }
 
 ad_types = {
@@ -47,7 +48,15 @@ ad_types = {
     'Bán đất nền dự án': 5,
     'Cho thuê văn phòng': 6,
     'Cho thuê căn hộ chung cư': 7,
-    'Cho thuê nhà riêng': 8
+    'Cho thuê nhà riêng': 8,
+    'Cho thuê nhà mặt phố': 9,
+    'Bán nhà biệt thự': 10,
+    'Cho thuê kho': 11,
+    'Cho thuê cửa hàng': 12
+}
+
+owners = {
+    'Chính chủ': 1
 }
 
 def run_curl(command):
@@ -160,19 +169,27 @@ def get_detail(command):
     return process_html(response)
 
 
+def get_id_from_value(str_value, value_dict, case_sensitive=True):
+    if case_sensitive:
+        for key in value_dict:
+            if key in str_value:
+                return value_dict[key]
+    else:
+        for key in value_dict:
+            if key.lower() in str_value.lower():
+                return value_dict[key]
+    return 0
+
+
+def get_area(str_value):
+    pass
+
+
 def write_to_file(info):
     with open('result.sql', mode='a') as outfile:
-        city_id = 0
-        for city in city_address:
-            if city in info['address']:
-                city_id = city_address[city]
-                break
-        
-        ad_type_id = 0
-        for ad_type in ad_types:
-            if ad_type in info['ad_type']:
-                ad_type_id = ad_types[ad_type]
-                break
+        city_id = get_id_from_value(info['address'], city_address)        
+        ad_type_id = get_id_from_value(info['ad_type'], ad_types)
+        is_owner = get_id_from_value(info['desc'], owners, False)
 
         outfile.write('INSERT INTO infos VALUES(NULL, "' + info['title'] + '", "' + 
             info['desc'] + '", "' + info['ad_type'] + '", "' + info['address'] + '", "' +
@@ -182,7 +199,7 @@ def write_to_file(info):
             info['restroom'] + ', "' + info['furniture'] + '", "' +
             info['user_name'] + '", "' + info['user_address'] + '", "' + 
             info['user_phone'] + '", "' + info['user_mobile'] + '", "' + 
-            info['user_email'] + '", "' + info['date'] + '", '+str(city_id)+', '+str(city_id)+', NULL);\n')
+            info['user_email'] + '", "' + info['date'] + '", '+str(city_id)+', '+str(ad_type_id)+', NULL);\n')
 
 
 def scrape():
